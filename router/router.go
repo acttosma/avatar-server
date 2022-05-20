@@ -47,6 +47,6 @@ func initV1(gin *gin.Engine) {
 	qrcode := v1.Group("/qrcode")
 	{
 		// 生成二维码功能 midlwre
-		qrcode.GET("/gen", midlwre.LogonCheck(), qrcodeRouter.Gen)
+		qrcode.GET("/gen", qrcodeRouter.Gen)
 	}
 }
