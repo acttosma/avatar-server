@@ -30,7 +30,7 @@ type Account struct {
 	PasswordSalt string        `gorm:"type:varchar(20);comment:密码的盐,在用户注册、修改密码时会自动生成字串"`
 	Avatar       string        `gorm:"type:varchar(200);not null;default:'';comment:用户头像"`
 	Type         int8          `gorm:"type:int;not null;default:0;comment:用户类型 0-普通用户"`
-	Source       AccountSource `gorm:"type:int;not null;default:0;comment:用户来源 0-普通用户,1-微信用户用户,2-支付宝用户……"`
+	Source       AccountSource `gorm:"type:int;not null;default:0;comment:用户来源 0-普通用户,1-微信用户,2-支付宝用户……"`
 	Status       AccountStatus `gorm:"type:int;not null;default:0;comment:用户状态 0-正常,1-封禁..."`
 
 	BaseEntity

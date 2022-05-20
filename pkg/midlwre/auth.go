@@ -2,10 +2,9 @@ package midlwre
 
 import (
 	"acttos.com/avatar/model/api/resp/rscode"
-	"net/http"
-
 	"acttos.com/avatar/pkg/util"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 // 用户状态校验:必须已经登录,不判断用户身份
@@ -19,7 +18,6 @@ func SwaggerCheck() gin.HandlerFunc {
 	}
 }
 
-// 用户状态校验:必须已经登录,不判断用户身份
 func LogonCheck() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		token := c.Request.Header.Get("Authorization")
