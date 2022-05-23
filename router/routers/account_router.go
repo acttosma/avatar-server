@@ -13,8 +13,8 @@ type AccountRouter struct{}
 
 // @BasePath /api/v1
 // @Tags 普通用户-账号相关
-// @Summary 用户完成微信OAuth授权后注册或登录使用
-// @Description 此接口用于在用户完成微信OAuth授权后,注册或登录使用,新用户完成注册,老用户直接登录
+// @Summary 用户登录使用
+// @Description 此接口用于在用户登录使用
 // @Accept json
 // @Produce json
 // @Param data body req.ActLogin true "ActLogin"

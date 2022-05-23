@@ -20,7 +20,6 @@ type QrcodeRouter struct{}
 // @Description 根据给定的text生成二维码图片
 // @Accept text/plain
 // @Produce json
-// @Param Authorization	header string true	"用户登录后返回的token"
 // @Param size query string true "需要生成的二维码的边长"
 // @Param text query string true "二维码所承载的文字信息,如果是http-url,需要进行url-encode编码"
 // @Success 200 {object} resp.QRCodeImg

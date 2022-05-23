@@ -1,6 +1,6 @@
 # server 
 organ: Avatar
-httpPort: 8080
+httpPort: 8000
 serverMode: debug   ## debug:开发环境,release:生产环境
 jwtSecret: 3225180e91b99ff350fcc2a968d2f76
 xxteaKey: d9bfc5e41ca55dce527a3476636bd7e4
@@ -23,6 +23,6 @@ loggerMaxSize: 500      ## single log file size, unit MB
 loggerMaxAge: 10        ## maximum number of days to retain
 loggerMaxBackups: 200   ## maximum number of old log files to retain
 
-gormLoggerFileName: /usr/local/avatar/logs/server-go/gorm.log
-paramsLoggerFileName: /usr/local/avatar/logs/server-go/params.log
-monitorLoggerFileName: /usr/local/avatar/logs/server-go/monitor.log
+gormLoggerFileName: logs/gorm.log
+paramsLoggerFileName: logs/params.log
+monitorLoggerFileName: logs/monitor.log

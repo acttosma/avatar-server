@@ -18,7 +18,7 @@ const docTemplate = `{
     "paths": {
         "/account/login": {
             "post": {
-                "description": "此接口用于在用户完成微信OAuth授权后,注册或登录使用,新用户完成注册,老用户直接登录",
+                "description": "此接口用于在用户登录使用",
                 "consumes": [
                     "application/json"
                 ],
@@ -28,7 +28,7 @@ const docTemplate = `{
                 "tags": [
                     "普通用户-账号相关"
                 ],
-                "summary": "用户完成微信OAuth授权后注册或登录使用",
+                "summary": "用户登录使用",
                 "parameters": [
                     {
                         "description": "ActLogin",
@@ -146,13 +146,6 @@ const docTemplate = `{
                 ],
                 "summary": "二维码图片生成接口",
                 "parameters": [
-                    {
-                        "type": "string",
-                        "description": "用户登录后返回的token",
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true
-                    },
                     {
                         "type": "string",
                         "description": "需要生成的二维码的边长",

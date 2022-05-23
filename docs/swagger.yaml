@@ -65,7 +65,7 @@ paths:
     post:
       consumes:
       - application/json
-      description: 此接口用于在用户完成微信OAuth授权后,注册或登录使用,新用户完成注册,老用户直接登录
+      description: 此接口用于在用户登录使用
       parameters:
       - description: ActLogin
         in: body
@@ -80,7 +80,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/resp.ActLogin'
-      summary: 用户完成微信OAuth授权后注册或登录使用
+      summary: 用户登录使用
       tags:
       - 普通用户-账号相关
   /captcha/check:
@@ -143,11 +143,6 @@ paths:
       - text/plain
       description: 根据给定的text生成二维码图片
       parameters:
-      - description: 用户登录后返回的token
-        in: header
-        name: Authorization
-        required: true
-        type: string
       - description: 需要生成的二维码的边长
         in: query
         name: size
