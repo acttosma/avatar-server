@@ -1,13 +1,19 @@
 package req
 
-// 用户使用手机号码+验证码登录请求参数
+// Register as a new account
+type ActRegister struct {
+	// E-Mail address [required]
+	Mail string `json:"mail" binding:"required"`
+	// Password, for safety reason,the request should mix this parameter with encryption,such as MD5 and SHA256. [required]
+	Password string `json:"password" binding:"required"`
+	// invite code [required]
+	InviteCode string `json:"inviteCode" binding:"required"`
+}
+
+// Login with mail and password
 type ActLogin struct {
-	// 桌台Id [必填]
-	TableId int64 `form:"tableId" json:"tableId" binding:"required"`
-	// 开放平台ID,支持微信,支付宝,微博等平台用户 [必填]
-	OpenId string `form:"openId" json:"openId" uri:"openId" xml:"openId" binding:"required"`
-	// 手机号码 [必填]
-	Mobile string `form:"mobile" json:"mobile" uri:"mobile" xml:"mobile" binding:"required"`
-	// 手机验证码 [必填]
-	VerifyCode string `form:"verifyCode" json:"verifyCode" uri:"verifyCode" xml:"verifyCode" binding:"required"`
+	// E-Mail address [required]
+	Mail string `json:"mail" binding:"required"`
+	// Password, for safety reason,the request should mix this parameter with encryption,such as MD5 and SHA256. [required]
+	Password string `json:"password" binding:"required"`
 }

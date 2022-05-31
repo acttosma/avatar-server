@@ -103,7 +103,6 @@ type CustomClaims struct {
 	jwt.StandardClaims
 }
 
-// 根据用户的用户名和密码产生token
 func (c *Crypto) GenerateJWT(accountId, accountType string) (string, error) {
 	//设置token有效时间,720小时候后过期(30天*24小时/天)
 	nowTime := time.Now()
@@ -121,11 +120,10 @@ func (c *Crypto) GenerateJWT(accountId, accountType string) (string, error) {
 
 	logger.Monitor.Debugf("JWT claims:%+v", claims)
 	tokenClaims := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	//该方法内部生成签名字符串,再用于获取完整、已签名的token
+
 	jwtSecret := []byte(setting.GetInstance().JwtSecret)
 	token, err := tokenClaims.SignedString(jwtSecret)
 
-	// 如想要实现随时踢人的效果,则需要redis的支持
 	if accountType == constant.DEFAULT_JWT_USER_ROLE_AUDIENCE {
 		redis.Helper.HSet(constant.REDIS_KEY_TOKEN_USER_MAP_KEY, accountId, token)
 	} else {
@@ -135,7 +133,6 @@ func (c *Crypto) GenerateJWT(accountId, accountType string) (string, error) {
 	return token, err
 }
 
-// 根据传入的token值获取到Claims对象信息,(进而获取其中的用户信息)
 func (c *Crypto) CheckJWT(token string) (accountId, accountType string, isLegal bool) {
 	claims, err := parseJWT(token)
 	if err != nil {
@@ -146,7 +143,6 @@ func (c *Crypto) CheckJWT(token string) (accountId, accountType string, isLegal 
 	accountType = claims.AccountType
 	logger.Monitor.Debugf("JWT claims:%+v", claims)
 
-	// 如想要实现随时踢人的效果,则需要redis的支持
 	var tokenInRedis string
 	if accountType == constant.DEFAULT_JWT_USER_ROLE_AUDIENCE {
 		tokenInRedis = redis.Helper.HGet(constant.REDIS_KEY_TOKEN_USER_MAP_KEY, accountId)

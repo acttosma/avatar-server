@@ -1,39 +1,38 @@
 package resp
 
-// 基本响应协议
+// Base response protocol
 type Base struct {
-	// 返回码,0表示正常,其它值表示出现问题
+	// the return code, 0 means OK, other codes mean failed
 	Code int `json:"code"`
-	// 对Code的简要描述
+	// The simple description of the code, the request should NOT use this value directly, it must be translated to another suitable message
 	Message string `json:"msg"`
 }
 
-type ActLogin struct {
-	// 账户ID 老用户情况下返回此值,新用户尚需绑定手机号码
+type ActRegister struct {
+	// The ID of the account
 	AccountId int64 `json:"accountId"`
-	// 令牌 老用户情况下返回此值,后续响应可携带鉴权用
-	Token string `json:"token"`
-	// 第三方开放ID
-	OpenId string `json:"openId"`
-	// 是否已经设置密码, true:已设置,fale:未设置
-	IsPwdSet bool `json:"isPwdSet"`
+}
+
+type ActLogin struct {
+	// The ID of the account
+	AccountId int64 `json:"accountId"`
 }
 
 type CaptchaGet struct {
-	// 图片验证码对应的唯一随机串
+	// The nonce key of the captcha
 	Nonce string `json:"nonce"`
-	// 验证码图片,含图片bytes的BASE64编码图片,格式png
+	// The captcha image of request, in BASE64 format
 	Captcha string `json:"captcha"`
 }
 
 type CheckCaptcha struct {
-	// 图片验证码校验码对应的Key
+	// The nonce key of the captcha check response
 	CaptchaNonceKey string `json:"captchaNonceKey"`
-	// 图片验证码校验码,验证成功情况下会返回此值,单次有效,用于在需要使用图片验证码防止机刷接口调用
+	// The nonce value of the captcha check response
 	CaptchaNonce string `json:"captchaNonce"`
 }
 
 type QRCodeImg struct {
-	// 二维码图片,图片bytes的BASE64编码图片,格式png
+	// The QRCode data, in BASE64 format
 	Image string `json:"image"`
 }

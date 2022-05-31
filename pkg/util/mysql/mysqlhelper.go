@@ -30,7 +30,7 @@ func InitMySQLHelper() {
 // Setup initialize the configuration instance
 func initMySQLDb() *MySQLHelper {
 	mySQLHelper := &MySQLHelper{}
-	// 参考 https://github.com/go-sql-driver/mysql#dsn-data-source-name 获取详情
+	// 参考 https://github.com/go-sql-driver/mysql#dsn-data-source-name
 	host := setting.GetInstance().MysqlHost
 	port := setting.GetInstance().MysqlPort
 	dbName := setting.GetInstance().MysqlDbName
