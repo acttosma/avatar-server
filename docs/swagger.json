@@ -156,7 +156,7 @@
         },
         "/qrcode/gen": {
             "get": {
-                "description": "根据给定的text生成二维码图片",
+                "description": "Generates a QRCode image with the given text",
                 "consumes": [
                     "text/plain"
                 ],
@@ -164,20 +164,20 @@
                     "application/json"
                 ],
                 "tags": [
-                    "不限用户-二维码图片相关"
+                    "Utilities-QRCode Module"
                 ],
-                "summary": "二维码图片生成接口",
+                "summary": "QRCode generator",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "需要生成的二维码的边长",
+                        "description": "the length of the square holding the QRCode image",
                         "name": "size",
                         "in": "query",
                         "required": true
                     },
                     {
                         "type": "string",
-                        "description": "二维码所承载的文字信息,如果是http-url,需要进行url-encode编码",
+                        "description": "the text of the QRCode image. if it is a http-url, it should be encoded with 'url-encode'",
                         "name": "text",
                         "in": "query",
                         "required": true

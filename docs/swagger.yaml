@@ -174,14 +174,15 @@ paths:
     get:
       consumes:
       - text/plain
-      description: 根据给定的text生成二维码图片
+      description: Generates a QRCode image with the given text
       parameters:
-      - description: 需要生成的二维码的边长
+      - description: the length of the square holding the QRCode image
         in: query
         name: size
         required: true
         type: string
-      - description: 二维码所承载的文字信息,如果是http-url,需要进行url-encode编码
+      - description: the text of the QRCode image. if it is a http-url, it should
+          be encoded with 'url-encode'
         in: query
         name: text
         required: true
@@ -193,7 +194,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/resp.QRCodeImg'
-      summary: 二维码图片生成接口
+      summary: QRCode generator
       tags:
-      - 不限用户-二维码图片相关
+      - Utilities-QRCode Module
 swagger: "2.0"

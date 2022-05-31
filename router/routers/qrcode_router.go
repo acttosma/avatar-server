@@ -15,13 +15,13 @@ import (
 type QrcodeRouter struct{}
 
 // @BasePath /api/v1
-// @Tags 不限用户-二维码图片相关
-// @Summary 二维码图片生成接口
-// @Description 根据给定的text生成二维码图片
+// @Tags Utilities-QRCode Module
+// @Summary QRCode generator
+// @Description Generates a QRCode image with the given text
 // @Accept text/plain
 // @Produce json
-// @Param size query string true "需要生成的二维码的边长"
-// @Param text query string true "二维码所承载的文字信息,如果是http-url,需要进行url-encode编码"
+// @Param size query string true "the length of the square holding the QRCode image"
+// @Param text query string true "the text of the QRCode image. if it is a http-url, it should be encoded with 'url-encode'"
 // @Success 200 {object} resp.QRCodeImg
 // @Router /qrcode/gen [GET]
 func (qr *QrcodeRouter) Gen(c *gin.Context) {
