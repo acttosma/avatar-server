@@ -1,0 +1,39 @@
+
+2022/05/31 17:16:22 /Users/acttos/work/avatar/avatar-server/pkg/util/mysql/mysqlhelper.go:56
+[error] failed to initialize database, got error Error 1049: Unknown database 'avatar'
+
+2022/05/31 17:16:41 /Users/acttos/go/pkg/mod/gorm.io/driver/mysql@v1.2.3/migrator.go:234
+[2.733ms] [rows:-] SELECT DATABASE()
+
+2022/05/31 17:16:41 /Users/acttos/go/pkg/mod/gorm.io/driver/mysql@v1.2.3/migrator.go:237
+[4.664ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'avatar%' ORDER BY SCHEMA_NAME='avatar' DESC limit 1
+
+2022/05/31 17:16:41 /Users/acttos/work/avatar/avatar-server/model/entity/account_entity.go:33
+[4.995ms] [rows:-] SELECT count(*) FROM information_schema.tables WHERE table_schema = 'avatar' AND table_name = 'accounts' AND table_type = 'BASE TABLE'
+
+2022/05/31 17:16:41 /Users/acttos/work/avatar/avatar-server/model/entity/account_entity.go:33
+[46.522ms] [rows:0] CREATE TABLE `accounts` (`id` bigint AUTO_INCREMENT,`name` varchar(20) NOT NULL COMMENT 'name or nickname of account',`mail` varchar(100) NOT NULL COMMENT 'email address of account',`mobile` varchar(20) NOT NULL COMMENT 'mobile number',`password` varchar(50) COMMENT 'password,md5 digested',`password_salt` varchar(20) COMMENT 'password salt,mixed with password',`invite_code` varchar(20) COMMENT 'invite code of account,unique',`status` tinyint NOT NULL DEFAULT 0 COMMENT 'status of account',`created_at` datetime(3) DEFAULT CURRENT_TIMESTAMP(3) COMMENT '创建时间',`updated_at` datetime(3) DEFAULT CURRENT_TIMESTAMP(3) COMMENT '修改时间',PRIMARY KEY (`id`),UNIQUE INDEX uidx_mail (`mail`),INDEX idx_mobile (`mobile`),UNIQUE INDEX uidx_iCode (`invite_code`),INDEX idx_ctime (`created_at`),INDEX idx_utime (`updated_at`))
+
+2022/05/31 17:16:41 /Users/acttos/go/pkg/mod/gorm.io/driver/mysql@v1.2.3/migrator.go:234
+[1.559ms] [rows:-] SELECT DATABASE()
+
+2022/05/31 17:16:41 /Users/acttos/go/pkg/mod/gorm.io/driver/mysql@v1.2.3/migrator.go:237
+[3.931ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'avatar%' ORDER BY SCHEMA_NAME='avatar' DESC limit 1
+
+2022/05/31 17:16:41 /Users/acttos/work/avatar/avatar-server/model/entity/avatar_entity.go:30
+[4.574ms] [rows:-] SELECT count(*) FROM information_schema.tables WHERE table_schema = 'avatar' AND table_name = 'avatars' AND table_type = 'BASE TABLE'
+
+2022/05/31 17:16:41 /Users/acttos/work/avatar/avatar-server/model/entity/avatar_entity.go:30
+[46.374ms] [rows:0] CREATE TABLE `avatars` (`id` bigint AUTO_INCREMENT,`account_id` bigint NOT NULL COMMENT 'the account id of owner',`avatar_id` bigint NOT NULL COMMENT 'the avatar id of owner',`name` varchar(20) NOT NULL COMMENT 'name of avatar',`price` decimal(8,2) NOT NULL DEFAULT '0' COMMENT 'price of avatar',`amt_output` decimal(8,2) NOT NULL DEFAULT '0' COMMENT 'the output of avatar per period',`daily_hours` decimal(8,2) NOT NULL DEFAULT '0' COMMENT 'the hours of day which avatar works,for display',`daily_seconds` decimal(8,2) NOT NULL DEFAULT '0' COMMENT 'the seconds of day which avatar work,for calculating',`valid_days` decimal(8,2) NOT NULL DEFAULT '0' COMMENT 'the valid days of avatar',`limit_count` int NOT NULL DEFAULT 0 COMMENT 'the limit count per avatar the user can hold in the current time',`start_at` datetime(3) DEFAULT CURRENT_TIMESTAMP(3) COMMENT 'the start time of validation',`end_at` datetime(3) DEFAULT CURRENT_TIMESTAMP(3) COMMENT 'the end time of validation',`status` tinyint NOT NULL DEFAULT 0 COMMENT 'the status of avatar',`created_at` datetime(3) DEFAULT CURRENT_TIMESTAMP(3) COMMENT '创建时间',`updated_at` datetime(3) DEFAULT CURRENT_TIMESTAMP(3) COMMENT '修改时间',PRIMARY KEY (`id`),INDEX idx_act_id (`account_id`),INDEX idx_avatar_id (`avatar_id`),INDEX idx_stime (`start_at`),INDEX idx_etime (`end_at`),INDEX idx_ctime (`created_at`),INDEX idx_utime (`updated_at`))
+
+2022/05/31 17:16:41 /Users/acttos/go/pkg/mod/gorm.io/driver/mysql@v1.2.3/migrator.go:234
+[1.602ms] [rows:-] SELECT DATABASE()
+
+2022/05/31 17:16:41 /Users/acttos/go/pkg/mod/gorm.io/driver/mysql@v1.2.3/migrator.go:237
+[4.015ms] [rows:1] SELECT SCHEMA_NAME from Information_schema.SCHEMATA where SCHEMA_NAME LIKE 'avatar%' ORDER BY SCHEMA_NAME='avatar' DESC limit 1
+
+2022/05/31 17:16:41 /Users/acttos/work/avatar/avatar-server/model/entity/avatar_product_entity.go:26
+[4.867ms] [rows:-] SELECT count(*) FROM information_schema.tables WHERE table_schema = 'avatar' AND table_name = 'avatar_products' AND table_type = 'BASE TABLE'
+
+2022/05/31 17:16:41 /Users/acttos/work/avatar/avatar-server/model/entity/avatar_product_entity.go:26
+[37.049ms] [rows:0] CREATE TABLE `avatar_products` (`id` bigint AUTO_INCREMENT,`name` varchar(20) NOT NULL COMMENT 'name of avatar',`price` decimal(8,2) NOT NULL DEFAULT '0' COMMENT 'price of avatar',`amt_output` decimal(8,2) NOT NULL DEFAULT '0' COMMENT 'the output of avatar per period',`daily_hours` decimal(8,2) NOT NULL DEFAULT '0' COMMENT 'the hours of day which avatar works,for display',`daily_seconds` decimal(8,2) NOT NULL DEFAULT '0' COMMENT 'the seconds of day which avatar work,for calculating',`valid_days` decimal(8,2) NOT NULL DEFAULT '0' COMMENT 'the valid days of avatar',`limit_count` int NOT NULL DEFAULT 0 COMMENT 'the limit count per avatar the user can hold in the current time',`status` tinyint NOT NULL DEFAULT 0 COMMENT 'the status of avatar',`created_at` datetime(3) DEFAULT CURRENT_TIMESTAMP(3) COMMENT '创建时间',`updated_at` datetime(3) DEFAULT CURRENT_TIMESTAMP(3) COMMENT '修改时间',PRIMARY KEY (`id`),INDEX idx_ctime (`created_at`),INDEX idx_utime (`updated_at`))

@@ -50,13 +50,10 @@ func GetInstance() *Settings {
 // Setup initialize the configuration instance
 func loadSettings() *Settings {
 	settings := &Settings{}
-	//读取resources/application.yaml文件
 	yamlFile, err := ioutil.ReadFile("conf/app.yaml")
-	//若出现错误,打印错误提示
 	if err != nil {
 		fmt.Println(err.Error())
 	}
-	//将读取的字符串转换成结构体conf
 	err = yaml.Unmarshal(yamlFile, settings)
 	if err != nil {
 		fmt.Println(err.Error())

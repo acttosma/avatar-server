@@ -8,20 +8,20 @@ import (
 	"acttos.com/avatar/pkg/util/redis"
 )
 
-// 初始化系统资源
+// initialize the resource of system
 func Initialize() {
-	// 日志系统
+	// log system
 	logger.InitLoggers()
 
-	//工具化类
+	//utilities
 	util.InitCryptoHelper()
 	util.InitTimeHelper()
 	util.InitTextHelper()
 
-	// 持久化层
+	// persistence layer
 	redis.InitRedisHelper()
 	mysql.InitMySQLHelper()
 
-	// 数据模型
+	// data entities
 	entity.InitTablesIfNeeded()
 }

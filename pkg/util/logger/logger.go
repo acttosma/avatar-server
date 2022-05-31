@@ -74,16 +74,15 @@ func getMonitorEncoder() zapcore.Encoder {
 
 func getMonitorLogWriter() zapcore.WriteSyncer {
 	lumberJackLogger := &lumberjack.Logger{
-		Filename:   setting.GetInstance().MonitorLoggerFileName, // 日志文件位置
-		MaxSize:    setting.GetInstance().LoggerMaxSize,         // 进行切割之前,日志文件的最大大小(MB为单位)
-		MaxBackups: setting.GetInstance().LoggerMaxBackups,      // 保留旧文件的最大个数
-		MaxAge:     setting.GetInstance().LoggerMaxAge,          // 保留旧文件的最大天数
-		Compress:   true,                                        // 是否压缩/归档旧文件
+		Filename:   setting.GetInstance().MonitorLoggerFileName,
+		MaxSize:    setting.GetInstance().LoggerMaxSize,
+		MaxBackups: setting.GetInstance().LoggerMaxBackups,
+		MaxAge:     setting.GetInstance().LoggerMaxAge,
+		Compress:   true,
 	}
 	return zapcore.AddSync(lumberJackLogger)
 }
 
-// GinLogger 接收gin框架默认的日志
 func GinLogger() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		start := time.Now()
@@ -105,7 +104,6 @@ func GinLogger() gin.HandlerFunc {
 	}
 }
 
-// GinRecovery recover掉项目可能出现的panic,并使用zap记录相关日志
 func GinRecovery(stack bool) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		defer func() {

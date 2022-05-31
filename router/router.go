@@ -23,8 +23,8 @@ func initV1(gin *gin.Engine) {
 		qrcodeRouter  = new(routers.QrcodeRouter)
 	)
 	docs.SwaggerInfo.BasePath = "/api/v1"
-	docs.SwaggerInfo.Title = "AvatarMeta交互API说明"
-	docs.SwaggerInfo.Description = "本文所列接口部分尚未联调,如有问题,及时反馈.<br/>所有接口必须加上BASE URL: /api/v1,<br/>如login接口全地址: https://host:port/api/v1/account/login, 以此类推"
+	docs.SwaggerInfo.Title = "AvatarMeta interaction between the server side and web side"
+	docs.SwaggerInfo.Description = "All the interfaces on this page have NOT tested deeply,if you have any question,please <a href='mailto:acttosma@126.com'>let me know</a>.<br/>All the interfaces should access with BASE URL as the prefix: /api/v1,<br/>For example: the whole URL of login interface: https://host:port/api/v1/account/login"
 
 	gin.GET("/api/v1/swagger/*any", midlwre.SwaggerCheck(), ginSwagger.WrapHandler(swaggerFiles.Handler))
 
@@ -32,21 +32,18 @@ func initV1(gin *gin.Engine) {
 
 	account := v1.Group("/account")
 	{
-		// 微信授权后，使用手机号+验证码登录
-		account.POST("/login", accountRouter.LoginAfterWechatOAuth)
+		account.POST("/register", accountRouter.Register)
+		account.POST("/login", accountRouter.LoginWithMail)
 	}
 
 	captcha := v1.Group("/captcha")
 	{
-		// 获取平台图片验证码功能
 		captcha.GET("/get", captchaRouter.Get)
-		// 图片验证码校验功能
 		captcha.GET("/check", captchaRouter.Check)
 	}
 
 	qrcode := v1.Group("/qrcode")
 	{
-		// 生成二维码功能 midlwre
 		qrcode.GET("/gen", qrcodeRouter.Gen)
 	}
 }

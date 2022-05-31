@@ -3,18 +3,20 @@ package entity
 import "time"
 
 type BaseEntity struct {
-	CreatedAt *time.Time `gorm:"type:datetime(3);index:idx_ctime;default:CURRENT_TIMESTAMP(3);comment:创建时间"`
-	UpdatedAt *time.Time `gorm:"type:datetime(3);index:idx_utime;default:CURRENT_TIMESTAMP(3);comment:修改时间"`
+	CreatedAt *time.Time `gorm:"type:datetime(3);index:idx_ctime;default:CURRENT_TIMESTAMP(3);comment:creation time"`
+	UpdatedAt *time.Time `gorm:"type:datetime(3);index:idx_utime;default:CURRENT_TIMESTAMP(3);comment:modification time"`
 }
 
-// 首次部署后,此方法代码可以注释掉,因为不再需要
+// Comment this function after deployed
 func InitTablesIfNeeded() {
 	var (
-		account    Account
-		memberCard MemberCard
+		account       Account
+		avatar        Avatar
+		avatarProduct AvatarProduct
 	)
 
 	account.CreateTableIfNeeded()
-	memberCard.CreateTableIfNeeded()
+	avatar.CreateTableIfNeeded()
+	avatarProduct.CreateTableIfNeeded()
 
 }

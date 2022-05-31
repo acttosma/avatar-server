@@ -18,7 +18,7 @@ const docTemplate = `{
     "paths": {
         "/account/login": {
             "post": {
-                "description": "此接口用于在用户登录使用",
+                "description": "User login action  with resp.ActLogin returned",
                 "consumes": [
                     "application/json"
                 ],
@@ -26,9 +26,9 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "普通用户-账号相关"
+                    "Audience - Account Module"
                 ],
-                "summary": "用户登录使用",
+                "summary": "User login with mail and password",
                 "parameters": [
                     {
                         "description": "ActLogin",
@@ -50,9 +50,43 @@ const docTemplate = `{
                 }
             }
         },
+        "/account/register": {
+            "post": {
+                "description": "Provide mail,password and invite code to register as a new account",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Audience - Account Module"
+                ],
+                "summary": "User register as an account through this api",
+                "parameters": [
+                    {
+                        "description": "ActRegister",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/req.ActRegister"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/resp.ActRegister"
+                        }
+                    }
+                }
+            }
+        },
         "/captcha/check": {
             "get": {
-                "description": "接收图片验证码参数对输入的captcha对儿进行校验",
+                "description": "This interface checks the captcha code (called 'cc')",
                 "consumes": [
                     "text/plain"
                 ],
@@ -60,20 +94,20 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "不限用户-图片验证码相关"
+                    "Utilities-Captcha Module"
                 ],
-                "summary": "图片验证码校验接口",
+                "summary": "Check the captchaCode",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "图片验证码的ID(captchaId)",
+                        "description": "the id of the catpcha",
                         "name": "ci",
                         "in": "query",
                         "required": true
                     },
                     {
                         "type": "string",
-                        "description": "图片验证码显示的字符(captchaCode),大小写不敏感",
+                        "description": "the letters on the captcha image, case insensitive",
                         "name": "cc",
                         "in": "query",
                         "required": true
@@ -91,7 +125,7 @@ const docTemplate = `{
         },
         "/captcha/get": {
             "get": {
-                "description": "根据给定的参数生成图片验证码,为提高安全性,不建议图片宽高太大或字符个数太少",
+                "description": "This interface returns an image data with the given parameters, the size of the request should be considered, can NOT be too high or too low.",
                 "consumes": [
                     "text/plain"
                 ],
@@ -99,25 +133,25 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "不限用户-图片验证码相关"
+                    "Utilities-Captcha Module"
                 ],
-                "summary": "图片验证码生成接口",
+                "summary": "Get a captcha image",
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "图片验证码的宽,默认值100,最大值500,单位:px",
+                        "description": "the width of the image, default value is 100, max value should no more than 500. unit:px",
                         "name": "w",
                         "in": "query"
                     },
                     {
                         "type": "integer",
-                        "description": "图片验证码的高,默认值30,最大值200,单位:px",
+                        "description": "the heigh of the image, default value is 30, max value should no more than 100. unit:px",
                         "name": "h",
                         "in": "query"
                     },
                     {
                         "type": "integer",
-                        "description": "图片验证码包含字符的个数,范围[4,8],请根据宽高显示的实际效果来决定此参数,默认值4,单位:个",
+                        "description": "the length of the letters shown on the image, default value is 4, it should be in the zone of [4,8]",
                         "name": "l",
                         "in": "query"
                     }
@@ -176,26 +210,38 @@ const docTemplate = `{
         "req.ActLogin": {
             "type": "object",
             "required": [
-                "mobile",
-                "openId",
-                "tableId",
-                "verifyCode"
+                "mail",
+                "password"
             ],
             "properties": {
-                "mobile": {
-                    "description": "手机号码 [必填]",
+                "mail": {
+                    "description": "E-Mail address [required]",
                     "type": "string"
                 },
-                "openId": {
-                    "description": "开放平台ID,支持微信,支付宝,微博等平台用户 [必填]",
+                "password": {
+                    "description": "Password, for safety reason,the request should mix this parameter with encryption,such as MD5 and SHA256. [required]",
+                    "type": "string"
+                }
+            }
+        },
+        "req.ActRegister": {
+            "type": "object",
+            "required": [
+                "inviteCode",
+                "mail",
+                "password"
+            ],
+            "properties": {
+                "inviteCode": {
+                    "description": "invite code [required]",
                     "type": "string"
                 },
-                "tableId": {
-                    "description": "桌台Id [必填]",
-                    "type": "integer"
+                "mail": {
+                    "description": "E-Mail address [required]",
+                    "type": "string"
                 },
-                "verifyCode": {
-                    "description": "手机验证码 [必填]",
+                "password": {
+                    "description": "Password, for safety reason,the request should mix this parameter with encryption,such as MD5 and SHA256. [required]",
                     "type": "string"
                 }
             }
@@ -204,20 +250,17 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "accountId": {
-                    "description": "账户ID 老用户情况下返回此值,新用户尚需绑定手机号码",
+                    "description": "The ID of the account",
                     "type": "integer"
-                },
-                "isPwdSet": {
-                    "description": "是否已经设置密码, true:已设置,fale:未设置",
-                    "type": "boolean"
-                },
-                "openId": {
-                    "description": "第三方开放ID",
-                    "type": "string"
-                },
-                "token": {
-                    "description": "令牌 老用户情况下返回此值,后续响应可携带鉴权用",
-                    "type": "string"
+                }
+            }
+        },
+        "resp.ActRegister": {
+            "type": "object",
+            "properties": {
+                "accountId": {
+                    "description": "The ID of the account",
+                    "type": "integer"
                 }
             }
         },
@@ -225,11 +268,11 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "captcha": {
-                    "description": "验证码图片,含图片bytes的BASE64编码图片,格式png",
+                    "description": "The captcha image of request, in BASE64 format",
                     "type": "string"
                 },
                 "nonce": {
-                    "description": "图片验证码对应的唯一随机串",
+                    "description": "The nonce key of the captcha",
                     "type": "string"
                 }
             }
@@ -238,11 +281,11 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "captchaNonce": {
-                    "description": "图片验证码校验码,验证成功情况下会返回此值,单次有效,用于在需要使用图片验证码防止机刷接口调用",
+                    "description": "The nonce value of the captcha check response",
                     "type": "string"
                 },
                 "captchaNonceKey": {
-                    "description": "图片验证码校验码对应的Key",
+                    "description": "The nonce key of the captcha check response",
                     "type": "string"
                 }
             }
@@ -251,7 +294,7 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "image": {
-                    "description": "二维码图片,图片bytes的BASE64编码图片,格式png",
+                    "description": "The QRCode data, in BASE64 format",
                     "type": "string"
                 }
             }

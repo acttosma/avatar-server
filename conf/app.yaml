@@ -1,19 +1,19 @@
 # server 
 organ: Avatar
 httpPort: 8000
-serverMode: debug   ## debug:开发环境,release:生产环境
+serverMode: debug   ## debug:development environment,release:production environment
 jwtSecret: 3225180e91b99ff350fcc2a968d2f76
 xxteaKey: d9bfc5e41ca55dce527a3476636bd7e4
 
 # mysql database 
-mysqlHost: 172.16.1.101
+mysqlHost: 127.0.0.1
 mysqlPort: 3306
 mysqlUser: root
 mysqlPassword: root
 mysqlDbName: avatar
 
 # redis database 
-redisUrl: 172.16.1.101:6379
+redisUrl: 127.0.0.1:6379
 redisPassword: redis
 redisPoolSize: 20
 redisPoolMinIdel: 5

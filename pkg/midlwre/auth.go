@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-// 用户状态校验:必须已经登录,不判断用户身份
+// Swagger user check, not all the requests will be accepted
 func SwaggerCheck() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		//token := c.Request.Header.Get("token")
