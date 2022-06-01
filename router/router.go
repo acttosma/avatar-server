@@ -47,6 +47,6 @@ func initV1(gin *gin.Engine) {
 
 	qrcode := v1.Group("/qrcode")
 	{
-		qrcode.GET("/gen", qrcodeRouter.Gen)
+		qrcode.GET("/gen", midlwre.LogonCheck(), qrcodeRouter.Gen)
 	}
 }

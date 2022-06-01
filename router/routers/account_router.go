@@ -66,6 +66,7 @@ func (ar *AccountRouter) LoginWithMail(c *gin.Context) {
 // @Description Change the login password, remember user must be online when do this action, otherwise please see '/account/resetPassword'
 // @Accept json
 // @Produce json
+// @Param Authorization	header string true	"The JWT (called 'authorization' in the return value) after user logged in"
 // @Param data body req.ChangePassword true "ChangePassword"
 // @Success 200 {object} resp.Base
 // @Router /account/changePwd [POST]
@@ -91,6 +92,7 @@ func (ar *AccountRouter) ChangePassword(c *gin.Context) {
 // @Description Change the trade password, remember user must be online when do this action
 // @Accept json
 // @Produce json
+// @Param Authorization	header string true	"The JWT (called 'authorization' in the return value) after user logged in"
 // @Param data body req.ChangePassword true "ChangePassword"
 // @Success 200 {object} resp.Base
 // @Router /account/changeTradePwd [POST]
@@ -116,6 +118,7 @@ func (ar *AccountRouter) ChangeTradePassword(c *gin.Context) {
 // @Description Set the trade password, remember user must be online when do this action
 // @Accept json
 // @Produce json
+// @Param Authorization	header string true	"The JWT (called 'authorization' in the return value) after user logged in"
 // @Param data body req.SetPassword true "SetPassword"
 // @Success 200 {object} resp.Base
 // @Router /account/setTradePwd [POST]

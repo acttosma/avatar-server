@@ -20,6 +20,7 @@ type QrcodeRouter struct{}
 // @Description Generates a QRCode image with the given text
 // @Accept text/plain
 // @Produce json
+// @Param Authorization	header string true	"The JWT (called 'authorization' in the return value) after user logged in"
 // @Param size query string true "the length of the square holding the QRCode image"
 // @Param text query string true "the text of the QRCode image. if it is a http-url, it should be encoded with 'url-encode'"
 // @Success 200 {object} resp.QRCodeImg
