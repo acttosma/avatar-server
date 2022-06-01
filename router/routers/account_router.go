@@ -32,14 +32,8 @@ func (ar *AccountRouter) Register(c *gin.Context) {
 	password := reqModel.Password
 	inviteCode := reqModel.InviteCode
 
-	resp, err := accountService.Register(mail, password, inviteCode)
-	if err != nil {
-		logger.Monitor.Errorf("Error:%+v", err)
-		c.JSON(http.StatusInternalServerError, rscode.Code(c).RSP_CODE_SYSTEM_ERROR)
-		return
-	}
-
-	c.JSON(http.StatusOK, resp)
+	code, resp := accountService.Register(mail, password, inviteCode)
+	c.JSON(code, resp)
 }
 
 // @BasePath /api/v1
@@ -62,14 +56,8 @@ func (ar *AccountRouter) LoginWithMail(c *gin.Context) {
 	mail := reqModel.Mail
 	password := reqModel.Password
 
-	loginResp, err := accountService.LoginWithMail(mail, password)
-	if err != nil {
-		logger.Monitor.Errorf("Error:%+v", err)
-		c.JSON(http.StatusInternalServerError, rscode.Code(c).RSP_CODE_SYSTEM_ERROR)
-		return
-	}
-
-	c.JSON(http.StatusOK, loginResp)
+	code, resp := accountService.LoginWithMail(mail, password)
+	c.JSON(code, resp)
 }
 
 // @BasePath /api/v1
