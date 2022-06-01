@@ -10,13 +10,19 @@ type BaseEntity struct {
 // Comment this function after deployed
 func InitTablesIfNeeded() {
 	var (
-		account       Account
-		avatar        UserAvatar
-		avatarProduct Avatar
+		account Account
+		aou     AvatarOfUser
+		aov     AvatarOfVender
+		foa     FlowOfAmt
+		fos     FlowOfScore
+		soc     StubOfCollecting
 	)
 
 	account.CreateTableIfNeeded()
-	avatar.CreateTableIfNeeded()
-	avatarProduct.CreateTableIfNeeded()
+	aou.CreateTableIfNeeded()
+	aov.CreateTableIfNeeded()
+	foa.CreateTableIfNeeded()
+	fos.CreateTableIfNeeded()
+	soc.CreateTableIfNeeded()
 
 }

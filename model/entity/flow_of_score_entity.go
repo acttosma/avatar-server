@@ -16,7 +16,7 @@ const (
 	SCORE_FLOW_TYPE_UNKNOWN             ScoreFlowType = -99
 )
 
-type ScoreFlow struct {
+type FlowOfScore struct {
 	Id          int64           `gorm:"primary_key"`
 	AccountId   int64           `gorm:"type:bigint;not null;index:idx_accountId"`
 	Amount      decimal.Decimal `gorm:"type:decimal(10,6);not null;default:0.0"`
@@ -27,26 +27,26 @@ type ScoreFlow struct {
 	BaseEntity
 }
 
-func (af ScoreFlow) CreateTableIfNeeded() bool {
+func (af FlowOfScore) CreateTableIfNeeded() bool {
 	db := mysql.Helper.Db
 	err := db.AutoMigrate(af)
 	return err == nil
 }
 
-func (af ScoreFlow) Add() (*ScoreFlow, error) {
+func (af FlowOfScore) Add() (*FlowOfScore, error) {
 	db := mysql.Helper.Db
 	err := db.Create(&af).Error
 	if err != nil {
-		logger.Monitor.Errorf("method entity.ScoreFlow.Add, error:%+v", err)
+		logger.Monitor.Errorf("method entity.FlowOfScore.Add, error:%+v", err)
 		return nil, err
 	}
 
 	return &af, nil
 }
 
-func (af ScoreFlow) FindByAccountId(actId, preId int64, idCmpSymbol string, size int) ([]ScoreFlow, error) {
+func (af FlowOfScore) FindByAccountId(actId, preId int64, idCmpSymbol string, size int) ([]FlowOfScore, error) {
 	db := mysql.Helper.Db
-	var afs []ScoreFlow
+	var afs []FlowOfScore
 	err := db.Order("id DESC").Limit(size).Find(&afs, "account_id = ? AND id "+idCmpSymbol+" ?", actId, preId).Error
 	if err != nil {
 		return nil, err
@@ -55,9 +55,9 @@ func (af ScoreFlow) FindByAccountId(actId, preId int64, idCmpSymbol string, size
 	return afs, nil
 }
 
-func (af ScoreFlow) FindByAccountIdWithTimeZone(actId int64, startTime, endTime time.Time) ([]ScoreFlow, error) {
+func (af FlowOfScore) FindByAccountIdWithTimeZone(actId int64, startTime, endTime time.Time) ([]FlowOfScore, error) {
 	db := mysql.Helper.Db
-	var afs []ScoreFlow
+	var afs []FlowOfScore
 	err := db.Find(&afs, "account_id = ? AND created_at BETWEEN ? AND ?", actId, startTime, endTime).Error
 	if err != nil {
 		return nil, err

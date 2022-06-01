@@ -18,7 +18,7 @@ const (
 	AMT_FLOW_TYPE_UNKNOWN         AmtFlowType = -99
 )
 
-type AmtFlow struct {
+type FlowOfAmt struct {
 	Id          int64           `gorm:"primary_key"`
 	AccountId   int64           `gorm:"type:bigint;not null;index:idx_accountId"`
 	Amount      decimal.Decimal `gorm:"type:decimal(10,6);not null;default:0.0"`
@@ -29,26 +29,26 @@ type AmtFlow struct {
 	BaseEntity
 }
 
-func (af AmtFlow) CreateTableIfNeeded() bool {
+func (af FlowOfAmt) CreateTableIfNeeded() bool {
 	db := mysql.Helper.Db
 	err := db.AutoMigrate(af)
 	return err == nil
 }
 
-func (af AmtFlow) Add() (*AmtFlow, error) {
+func (af FlowOfAmt) Add() (*FlowOfAmt, error) {
 	db := mysql.Helper.Db
 	err := db.Create(&af).Error
 	if err != nil {
-		logger.Monitor.Errorf("method entity.AmtFlow.Add, error:%+v", err)
+		logger.Monitor.Errorf("method entity.FlowOfAmt.Add, error:%+v", err)
 		return nil, err
 	}
 
 	return &af, nil
 }
 
-func (af AmtFlow) FindByAccountId(actId, preId int64, idCmpSymbol string, size int) ([]AmtFlow, error) {
+func (af FlowOfAmt) FindByAccountId(actId, preId int64, idCmpSymbol string, size int) ([]FlowOfAmt, error) {
 	db := mysql.Helper.Db
-	var afs []AmtFlow
+	var afs []FlowOfAmt
 	err := db.Order("id DESC").Limit(size).Find(&afs, "account_id = ? AND id "+idCmpSymbol+" ?", actId, preId).Error
 	if err != nil {
 		return nil, err
@@ -57,9 +57,9 @@ func (af AmtFlow) FindByAccountId(actId, preId int64, idCmpSymbol string, size i
 	return afs, nil
 }
 
-func (af AmtFlow) FindByAccountIdWithTimeZone(actId int64, startTime, endTime time.Time) ([]AmtFlow, error) {
+func (af FlowOfAmt) FindByAccountIdWithTimeZone(actId int64, startTime, endTime time.Time) ([]FlowOfAmt, error) {
 	db := mysql.Helper.Db
-	var afs []AmtFlow
+	var afs []FlowOfAmt
 	err := db.Find(&afs, "account_id = ? AND created_at BETWEEN ? AND ?", actId, startTime, endTime).Error
 	if err != nil {
 		return nil, err
