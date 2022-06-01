@@ -29,17 +29,56 @@ definitions:
     - mail
     - password
     type: object
+  req.ChangePassword:
+    properties:
+      password:
+        description: Password, for safety reason,the request should mix this parameter
+          with encryption,such as MD5 and SHA256. [required]
+        type: string
+      prePassword:
+        description: PreviousPassword, for safety reason,the request should mix this
+          parameter with encryption,such as MD5 and SHA256. [required]
+        type: string
+    required:
+    - password
+    - prePassword
+    type: object
+  req.SetPassword:
+    properties:
+      password:
+        description: Password, for safety reason,the request should mix this parameter
+          with encryption,such as MD5 and SHA256. [required]
+        type: string
+    required:
+    - password
+    type: object
   resp.ActLogin:
     properties:
       accountId:
         description: The ID of the account
         type: integer
+      authorization:
+        description: The authorization token for the account
+        type: string
     type: object
   resp.ActRegister:
     properties:
       accountId:
         description: The ID of the account
         type: integer
+      authorization:
+        description: The authorization token for the account
+        type: string
+    type: object
+  resp.Base:
+    properties:
+      code:
+        description: the return code, 200 means OK, other codes mean failed
+        type: integer
+      msg:
+        description: The simple description of the code, the request should NOT use
+          this value directly, it must be translated to another suitable message
+        type: string
     type: object
   resp.CaptchaGet:
     properties:
@@ -68,6 +107,52 @@ definitions:
 info:
   contact: {}
 paths:
+  /account/changePwd:
+    post:
+      consumes:
+      - application/json
+      description: Change the login password, remember user must be online when do
+        this action, otherwise please see '/account/resetPassword'
+      parameters:
+      - description: ChangePassword
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/req.ChangePassword'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/resp.Base'
+      summary: User change the password while logged in
+      tags:
+      - Audience - Account Module
+  /account/changeTradePwd:
+    post:
+      consumes:
+      - application/json
+      description: Change the trade password, remember user must be online when do
+        this action
+      parameters:
+      - description: ChangePassword
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/req.ChangePassword'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/resp.Base'
+      summary: User change the trade password while logged in
+      tags:
+      - Audience - Account Module
   /account/login:
     post:
       consumes:
@@ -110,6 +195,29 @@ paths:
           schema:
             $ref: '#/definitions/resp.ActRegister'
       summary: User register as an account through this api
+      tags:
+      - Audience - Account Module
+  /account/setTradePwd:
+    post:
+      consumes:
+      - application/json
+      description: Set the trade password, remember user must be online when do this
+        action
+      parameters:
+      - description: SetPassword
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/req.SetPassword'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/resp.Base'
+      summary: User set the trade password while logged in
       tags:
       - Audience - Account Module
   /captcha/check:

@@ -16,6 +16,74 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/account/changePwd": {
+            "post": {
+                "description": "Change the login password, remember user must be online when do this action, otherwise please see '/account/resetPassword'",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Audience - Account Module"
+                ],
+                "summary": "User change the password while logged in",
+                "parameters": [
+                    {
+                        "description": "ChangePassword",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/req.ChangePassword"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/resp.Base"
+                        }
+                    }
+                }
+            }
+        },
+        "/account/changeTradePwd": {
+            "post": {
+                "description": "Change the trade password, remember user must be online when do this action",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Audience - Account Module"
+                ],
+                "summary": "User change the trade password while logged in",
+                "parameters": [
+                    {
+                        "description": "ChangePassword",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/req.ChangePassword"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/resp.Base"
+                        }
+                    }
+                }
+            }
+        },
         "/account/login": {
             "post": {
                 "description": "User login action  with resp.ActLogin returned",
@@ -79,6 +147,40 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/resp.ActRegister"
+                        }
+                    }
+                }
+            }
+        },
+        "/account/setTradePwd": {
+            "post": {
+                "description": "Set the trade password, remember user must be online when do this action",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Audience - Account Module"
+                ],
+                "summary": "User set the trade password while logged in",
+                "parameters": [
+                    {
+                        "description": "SetPassword",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/req.SetPassword"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/resp.Base"
                         }
                     }
                 }
@@ -246,12 +348,45 @@ const docTemplate = `{
                 }
             }
         },
+        "req.ChangePassword": {
+            "type": "object",
+            "required": [
+                "password",
+                "prePassword"
+            ],
+            "properties": {
+                "password": {
+                    "description": "Password, for safety reason,the request should mix this parameter with encryption,such as MD5 and SHA256. [required]",
+                    "type": "string"
+                },
+                "prePassword": {
+                    "description": "PreviousPassword, for safety reason,the request should mix this parameter with encryption,such as MD5 and SHA256. [required]",
+                    "type": "string"
+                }
+            }
+        },
+        "req.SetPassword": {
+            "type": "object",
+            "required": [
+                "password"
+            ],
+            "properties": {
+                "password": {
+                    "description": "Password, for safety reason,the request should mix this parameter with encryption,such as MD5 and SHA256. [required]",
+                    "type": "string"
+                }
+            }
+        },
         "resp.ActLogin": {
             "type": "object",
             "properties": {
                 "accountId": {
                     "description": "The ID of the account",
                     "type": "integer"
+                },
+                "authorization": {
+                    "description": "The authorization token for the account",
+                    "type": "string"
                 }
             }
         },
@@ -261,6 +396,23 @@ const docTemplate = `{
                 "accountId": {
                     "description": "The ID of the account",
                     "type": "integer"
+                },
+                "authorization": {
+                    "description": "The authorization token for the account",
+                    "type": "string"
+                }
+            }
+        },
+        "resp.Base": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "the return code, 200 means OK, other codes mean failed",
+                    "type": "integer"
+                },
+                "msg": {
+                    "description": "The simple description of the code, the request should NOT use this value directly, it must be translated to another suitable message",
+                    "type": "string"
                 }
             }
         },
