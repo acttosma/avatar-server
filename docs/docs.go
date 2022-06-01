@@ -31,6 +31,13 @@ const docTemplate = `{
                 "summary": "User change the password while logged in",
                 "parameters": [
                     {
+                        "type": "string",
+                        "description": "The JWT (called 'authorization' in the return value) after user logged in",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
                         "description": "ChangePassword",
                         "name": "data",
                         "in": "body",
@@ -64,6 +71,13 @@ const docTemplate = `{
                 ],
                 "summary": "User change the trade password while logged in",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "The JWT (called 'authorization' in the return value) after user logged in",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "description": "ChangePassword",
                         "name": "data",
@@ -166,6 +180,13 @@ const docTemplate = `{
                 ],
                 "summary": "User set the trade password while logged in",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "The JWT (called 'authorization' in the return value) after user logged in",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "description": "SetPassword",
                         "name": "data",
@@ -282,6 +303,13 @@ const docTemplate = `{
                 ],
                 "summary": "QRCode generator",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "The JWT (called 'authorization' in the return value) after user logged in",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "string",
                         "description": "the length of the square holding the QRCode image",

@@ -114,6 +114,12 @@ paths:
       description: Change the login password, remember user must be online when do
         this action, otherwise please see '/account/resetPassword'
       parameters:
+      - description: The JWT (called 'authorization' in the return value) after user
+          logged in
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: ChangePassword
         in: body
         name: data
@@ -137,6 +143,12 @@ paths:
       description: Change the trade password, remember user must be online when do
         this action
       parameters:
+      - description: The JWT (called 'authorization' in the return value) after user
+          logged in
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: ChangePassword
         in: body
         name: data
@@ -204,6 +216,12 @@ paths:
       description: Set the trade password, remember user must be online when do this
         action
       parameters:
+      - description: The JWT (called 'authorization' in the return value) after user
+          logged in
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: SetPassword
         in: body
         name: data
@@ -284,6 +302,12 @@ paths:
       - text/plain
       description: Generates a QRCode image with the given text
       parameters:
+      - description: The JWT (called 'authorization' in the return value) after user
+          logged in
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: the length of the square holding the QRCode image
         in: query
         name: size
