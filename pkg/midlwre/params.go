@@ -50,8 +50,7 @@ func ParamLog() gin.HandlerFunc {
 			c.Next()
 			respBody := strings.Trim(respBodyWriter.bodyBuf.String(), "\n")
 			actId := c.Request.Header.Get("accountId")
-			mchId := c.Request.Header.Get("merchantId")
-			logger.Monitor.Infof("===== %s - mchId:%s | actId:%s", nonce, mchId, actId)
+			logger.Monitor.Infof("===== %s - actId:%s", nonce, actId)
 			logger.Monitor.Infof("===== %s - Response =========================\n%s\n", nonce, respBody)
 		}
 	}
