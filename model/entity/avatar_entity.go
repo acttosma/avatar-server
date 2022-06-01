@@ -10,11 +10,11 @@ import (
 type Avatar struct {
 	Id           int64           `gorm:"primary_key"`
 	Name         int64           `gorm:"type:varchar(20);not null;comment:name of avatar"`
-	Price        decimal.Decimal `gorm:"type:decimal(8,2);not null;default:0;comment:price of avatar"`
-	AMTOutput    decimal.Decimal `gorm:"type:decimal(8,2);not null;default:0;comment:the output of avatar per period"`
-	DailyHours   decimal.Decimal `gorm:"type:decimal(8,2);not null;default:0;comment:the hours of day which avatar works,for display"`
-	DailySeconds decimal.Decimal `gorm:"type:decimal(8,2);not null;default:0;comment:the seconds of day which avatar work,for calculating"`
-	ValidDays    decimal.Decimal `gorm:"type:decimal(8,2);not null;default:0;comment:the valid days of avatar"`
+	Price        decimal.Decimal `gorm:"type:decimal(10,6);not null;default:0;comment:price of avatar"`
+	AMTOutput    decimal.Decimal `gorm:"type:decimal(10,6);not null;default:0;comment:the output of avatar per period"`
+	DailyHours   decimal.Decimal `gorm:"type:decimal(10,6);not null;default:0;comment:the hours of day which avatar works,for display"`
+	DailySeconds decimal.Decimal `gorm:"type:decimal(10,6);not null;default:0;comment:the seconds of day which avatar work,for calculating"`
+	ValidDays    decimal.Decimal `gorm:"type:decimal(10,6);not null;default:0;comment:the valid days of avatar"`
 	LimitCount   int32           `gorm:"type:int;not null;default:0;comment:the limit count per avatar the user can hold in the current time"`
 	Status       int8            `gorm:"type:int;not null;default:0;comment:the status of avatar"`
 
