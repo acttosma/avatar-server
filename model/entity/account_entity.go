@@ -59,7 +59,7 @@ func (a Account) FindById(id int64) (*Account, error) {
 
 func (a Account) FindByInviteCode(inviteCode string) (*Account, error) {
 	db := mysql.Helper.Db
-	err := db.First(&a, "inviter_code = ?", inviteCode).Error
+	err := db.First(&a, "invite_code = ?", inviteCode).Error
 	if err != nil {
 		logger.Monitor.Errorf("Error when finding account by inviterCode:%s, error:%+v", inviteCode, err)
 		return nil, err
