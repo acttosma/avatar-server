@@ -46,6 +46,41 @@ func (a Account) Add() (*Account, error) {
 	return &a, nil
 }
 
+// Add account record and balance & userinfo record, with transaction supported
+func (a Account) Register() (*Account, error) {
+	db := mysql.Helper.Db
+	tx := db.Begin()
+	err := tx.Create(&a).Error
+	if err != nil {
+		logger.Monitor.Errorf("method entity.Account.Register, error:%+v", err)
+		tx.Rollback()
+		return nil, err
+	}
+	// Create extra tables
+	balance := UserBalance{
+		AccountId: a.Id,
+	}
+	err = tx.Create(&balance).Error
+	if err != nil {
+		logger.Monitor.Errorf("method entity.Account.Register.Create balance, error:%+v", err)
+		tx.Rollback()
+		return nil, err
+	}
+	info := UserInfo{
+		AccountId: a.Id,
+		Mail:      a.Mail,
+	}
+	err = tx.Create(&info).Error
+	if err != nil {
+		logger.Monitor.Errorf("method entity.Account.Register.Create user info, error:%+v", err)
+		tx.Rollback()
+		return nil, err
+	}
+	tx.Commit()
+
+	return &a, nil
+}
+
 func (a Account) FindById(id int64) (*Account, error) {
 	db := mysql.Helper.Db
 	err := db.First(&a, "id = ?", id).Error

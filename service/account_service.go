@@ -49,7 +49,7 @@ func (as *AccountService) Register(mail, password, inviteCode string) (int, inte
 		PasswordSalt: passwordSalt,
 		InviterId:    inviter.Id,
 	}
-	savedAct, err := account.Add()
+	savedAct, err := account.Register()
 	if err != nil {
 		logger.Monitor.Errorf("Error:%+v", err)
 		return http.StatusInternalServerError, rscode.Eng().RSP_CODE_SYSTEM_ERROR
