@@ -18,7 +18,13 @@ type ActLogin struct {
 	Password string `json:"password" binding:"required"`
 }
 
-// Login with mail and password
+// The set password data struct
+type SetPassword struct {
+	// Password, for safety reason,the request should mix this parameter with encryption,such as MD5 and SHA256. [required]
+	Password string `json:"password" binding:"required"`
+}
+
+// The change password data struct
 type ChangePassword struct {
 	// PreviousPassword, for safety reason,the request should mix this parameter with encryption,such as MD5 and SHA256. [required]
 	PreviousPassword string `json:"prePassword" binding:"required"`

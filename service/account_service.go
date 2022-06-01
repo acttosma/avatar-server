@@ -102,7 +102,7 @@ func (as *AccountService) LoginWithMail(mail, password string) (int, interface{}
 	}
 }
 
-func (as *AccountService) ChangePassword(actIdStr string, prePassword, password string) (int, interface{}) {
+func (as *AccountService) ChangePassword(actIdStr, prePassword, password string) (int, interface{}) {
 	actId, err := strconv.ParseInt(actIdStr, 10, 64)
 	if err != nil {
 		return http.StatusBadRequest, rscode.Eng().RSP_CODE_PARAM_ERROR
@@ -140,7 +140,7 @@ func (as *AccountService) ChangePassword(actIdStr string, prePassword, password 
 	return http.StatusOK, rscode.Eng().RSP_CODE_SUCCEED
 }
 
-func (as *AccountService) ChangeTradePassword(actIdStr string, prePassword, password string) (int, interface{}) {
+func (as *AccountService) ChangeTradePassword(actIdStr, prePassword, password string) (int, interface{}) {
 	actId, err := strconv.ParseInt(actIdStr, 10, 64)
 	if err != nil {
 		return http.StatusBadRequest, rscode.Eng().RSP_CODE_PARAM_ERROR
@@ -163,6 +163,43 @@ func (as *AccountService) ChangeTradePassword(actIdStr string, prePassword, pass
 	if prePassword != act.TradePassword {
 		logger.Monitor.Errorf("The trade password is incorrect")
 		return http.StatusBadRequest, rscode.Eng().RSP_CODE_ACCOUNT_PWD_INVALID_ERROR
+	}
+
+	// Handle the return response
+	act.TradePasswordSalt = util.TextHelper.RandomASCII(16)
+	password = util.CryptoHelper.GenerateSaltedPassword(password, act.TradePasswordSalt)
+	act.TradePassword = password
+	act, err = act.Save()
+	if err != nil {
+		logger.Monitor.Errorf("Error:%+v", err)
+		return http.StatusInternalServerError, rscode.Eng().RSP_CODE_SYSTEM_ERROR
+	}
+
+	return http.StatusOK, rscode.Eng().RSP_CODE_SUCCEED
+}
+
+func (as *AccountService) SetTradePassword(actIdStr, password string) (int, interface{}) {
+	actId, err := strconv.ParseInt(actIdStr, 10, 64)
+	if err != nil {
+		return http.StatusBadRequest, rscode.Eng().RSP_CODE_PARAM_ERROR
+	}
+
+	var account entity.Account
+	// Check the mail
+	act, err := account.FindById(actId)
+	if err != nil && err != gorm.ErrRecordNotFound {
+		logger.Monitor.Errorf("Error:%+v", err)
+		return http.StatusBadRequest, rscode.Eng().RSP_CODE_SYSTEM_ERROR
+	}
+	if act == nil {
+		logger.Monitor.Errorf("The account does NOT exist")
+		return http.StatusBadRequest, rscode.Eng().RSP_CODE_ACCOUNT_NOT_EXIST_ERROR
+	}
+
+	// Check the previous password
+	if act.TradePassword != "" {
+		logger.Monitor.Errorf("The trade password has already set")
+		return http.StatusBadRequest, rscode.Eng().RSP_CODE_ACCOUNT_TRADE_PWD_ALREADY_SET_ERROR
 	}
 
 	// Handle the return response
