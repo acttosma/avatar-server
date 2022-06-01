@@ -21,11 +21,12 @@ func SwaggerCheck() gin.HandlerFunc {
 func LogonCheck() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		token := c.Request.Header.Get("Authorization")
-		_, accountType, check := util.CryptoHelper.CheckJWT(token)
+		actId, accountType, check := util.CryptoHelper.CheckJWT(token)
 
 		if !check || accountType == "-1" {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, rscode.Code(c).RSP_CODE_ACCOUNT_NOT_LOGIN_ERROR)
 			return
 		}
+		c.Request.Header.Set("AccountId", actId)
 	}
 }

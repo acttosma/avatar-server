@@ -29,6 +29,7 @@ func main() {
 
 func customDefault() *gin.Engine {
 	engine := gin.New()
+	engine.SetTrustedProxies(nil)
 	engine.Use(logger.GinLogger(), logger.GinRecovery(true))
 	return engine
 }
