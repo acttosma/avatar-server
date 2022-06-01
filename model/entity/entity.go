@@ -16,6 +16,8 @@ func InitTablesIfNeeded() {
 		foa     FlowOfAmt
 		fos     FlowOfScore
 		soc     StubOfCollecting
+		ub      UserBalance
+		ui      UserInfo
 	)
 
 	account.CreateTableIfNeeded()
@@ -24,5 +26,6 @@ func InitTablesIfNeeded() {
 	foa.CreateTableIfNeeded()
 	fos.CreateTableIfNeeded()
 	soc.CreateTableIfNeeded()
-
+	ub.CreateTableIfNeeded()
+	ui.CreateTableIfNeeded()
 }
