@@ -71,3 +71,28 @@ func (ar *AccountRouter) LoginWithMail(c *gin.Context) {
 
 	c.JSON(http.StatusOK, loginResp)
 }
+
+// @BasePath /api/v1
+// @Tags Audience - Account Module
+// @Summary User change the password while logged in
+// @Description Change the login password, remember user must be online when do this action, otherwise please see '/account/resetPassword'
+// @Accept json
+// @Produce json
+// @Param data body req.ChangePassword true "ChangePassword"
+// @Success 200 {object} resp.Base
+// @Router /account/changePwd [POST]
+func (ar *AccountRouter) ChangePassword(c *gin.Context) {
+	var reqModel req.ChangePassword
+	if err := c.ShouldBind(&reqModel); err != nil {
+		logger.Monitor.Errorf("ChangePassword param parse error:%+v", err)
+		c.JSON(http.StatusBadRequest, rscode.Code(c).RSP_CODE_PARAM_ERROR)
+		return
+	}
+
+	actIdStr := c.Request.Header.Get("AccountId")
+	prePassword := reqModel.PreviousPassword
+	password := reqModel.Password
+
+	code, resp := accountService.ChangePassword(actIdStr, prePassword, password)
+	c.JSON(code, resp)
+}

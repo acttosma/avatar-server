@@ -16,15 +16,17 @@ const (
 )
 
 type Account struct {
-	Id           int64         `gorm:"primary_key"`
-	Name         string        `gorm:"type:varchar(20);not null;comment:name or nickname of account"`
-	Mail         string        `gorm:"type:varchar(100);not null;index:uidx_mail,unique;comment:email address of account"`
-	Mobile       string        `gorm:"type:varchar(20);not null;index:idx_mobile;comment:mobile number"`
-	Password     string        `gorm:"type:varchar(50);comment:password,md5 digested"`
-	PasswordSalt string        `gorm:"type:varchar(20);comment:password salt,mixed with password"`
-	InviteCode   string        `gorm:"type:varchar(20);index:uidx_iCode,unique;comment:invite code of account,unique"`
-	InviterId    int64         `gorm:"type:bigint;not null;index:idx_inviter_id;comment:the inviter account id"`
-	Status       AccountStatus `gorm:"type:int;not null;default:0;comment:status of account"`
+	Id                int64         `gorm:"primary_key"`
+	Name              string        `gorm:"type:varchar(20);not null;comment:name or nickname of account"`
+	Mail              string        `gorm:"type:varchar(100);not null;index:uidx_mail,unique;comment:email address of account"`
+	Mobile            string        `gorm:"type:varchar(20);not null;index:idx_mobile;comment:mobile number"`
+	Password          string        `gorm:"type:varchar(50);comment:password,md5 digested"`
+	PasswordSalt      string        `gorm:"type:varchar(20);comment:password salt,mixed with password"`
+	TradePassword     string        `gorm:"type:varchar(50);comment:trade password,md5 digested"`
+	TradePasswordSalt string        `gorm:"type:varchar(20);comment:trade password salt,mixed with password"`
+	InviteCode        string        `gorm:"type:varchar(20);index:uidx_iCode,unique;comment:invite code of account,unique"`
+	InviterId         int64         `gorm:"type:bigint;not null;index:idx_inviter_id;comment:the inviter account id"`
+	Status            AccountStatus `gorm:"type:int;not null;default:0;comment:status of account"`
 
 	BaseEntity
 }
@@ -79,13 +81,13 @@ func (a Account) FindByMail(mail string) (*Account, error) {
 	return &a, nil
 }
 
-func (a Account) Save() error {
+func (a Account) Save() (*Account, error) {
 	db := mysql.Helper.Db
 	err := db.Model(&a).Updates(a).Error
 	if err != nil {
 		logger.Monitor.Errorf("Error when saving account:%+v, error:%+v", a, err)
-		return err
+		return nil, err
 	}
 
-	return nil
+	return &a, nil
 }
