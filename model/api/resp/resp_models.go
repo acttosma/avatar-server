@@ -2,7 +2,7 @@ package resp
 
 // Base response protocol
 type Base struct {
-	// the return code, 0 means OK, other codes mean failed
+	// the return code, 200 means OK, other codes mean failed
 	Code int `json:"code"`
 	// The simple description of the code, the request should NOT use this value directly, it must be translated to another suitable message
 	Message string `json:"msg"`
@@ -11,11 +11,22 @@ type Base struct {
 type ActRegister struct {
 	// The ID of the account
 	AccountId int64 `json:"accountId"`
+	// The authorization token for the account
+	Authorization string `json:"authorization"`
 }
 
 type ActLogin struct {
 	// The ID of the account
 	AccountId int64 `json:"accountId"`
+	// The authorization token for the account
+	Authorization string `json:"authorization"`
+}
+
+type ActChangePassword struct {
+	// The current password
+	Password string `json:"password"`
+	// The new password to be set
+	NewPassword string `json:"newPassword"`
 }
 
 type CaptchaGet struct {

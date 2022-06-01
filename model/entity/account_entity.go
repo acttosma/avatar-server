@@ -23,6 +23,7 @@ type Account struct {
 	Password     string        `gorm:"type:varchar(50);comment:password,md5 digested"`
 	PasswordSalt string        `gorm:"type:varchar(20);comment:password salt,mixed with password"`
 	InviteCode   string        `gorm:"type:varchar(20);index:uidx_iCode,unique;comment:invite code of account,unique"`
+	InviterId    int64         `gorm:"type:bigint;not null;index:idx_inviter_id;comment:the inviter account id"`
 	Status       AccountStatus `gorm:"type:int;not null;default:0;comment:status of account"`
 
 	BaseEntity
@@ -34,36 +35,48 @@ func (a Account) CreateTableIfNeeded() bool {
 	return err == nil
 }
 
-func (a Account) Add() (Account, error) {
+func (a Account) Add() (*Account, error) {
 	db := mysql.Helper.Db
 	err := db.Create(&a).Error
 	if err != nil {
 		logger.Monitor.Errorf("method entity.Account.Add, error:%+v", err)
-		return a, err
+		return nil, err
 	}
 
-	return a, nil
+	return &a, nil
 }
 
-func (a Account) FindById(id int64) (Account, error) {
+func (a Account) FindById(id int64) (*Account, error) {
 	db := mysql.Helper.Db
 	err := db.First(&a, "id = ?", id).Error
 	if err != nil {
 		logger.Monitor.Errorf("Error when finding account by id:%d, error:%+v", id, err)
-		return a, err
+		return nil, err
 	}
 
-	return a, nil
+	return &a, nil
 }
 
-func (a Account) FindByMail(mail string) (Account, error) {
+func (a Account) FindByInviteCode(inviteCode string) (*Account, error) {
+	db := mysql.Helper.Db
+	err := db.First(&a, "inviter_code = ?", inviteCode).Error
+	if err != nil {
+		logger.Monitor.Errorf("Error when finding account by inviterCode:%s, error:%+v", inviteCode, err)
+		return nil, err
+	}
+
+	return &a, nil
+}
+
+func (a Account) FindByMail(mail string) (*Account, error) {
 	db := mysql.Helper.Db
 	err := db.First(&a, "mail = ?", mail).Error
 	if err != nil {
-		return a, err
+		logger.Monitor.Errorf("Error when finding account by mail:%s, error:%+v", mail, err)
+		return nil, err
 	}
 
-	return a, nil
+	return &a, nil
 }
 
 func (a Account) Save() error {

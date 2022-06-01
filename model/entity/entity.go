@@ -11,8 +11,8 @@ type BaseEntity struct {
 func InitTablesIfNeeded() {
 	var (
 		account       Account
-		avatar        Avatar
-		avatarProduct AvatarProduct
+		avatar        UserAvatar
+		avatarProduct Avatar
 	)
 
 	account.CreateTableIfNeeded()

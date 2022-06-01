@@ -9,8 +9,6 @@ import (
 
 type Avatar struct {
 	Id           int64           `gorm:"primary_key"`
-	AccountId    int64           `gorm:"type:bigint;not null;index:idx_act_id;comment:the account id of owner"`
-	AvatarId     int64           `gorm:"type:bigint;not null;index:idx_avatar_id;comment:the avatar id of owner"`
 	Name         int64           `gorm:"type:varchar(20);not null;comment:name of avatar"`
 	Price        decimal.Decimal `gorm:"type:decimal(8,2);not null;default:0;comment:price of avatar"`
 	AMTOutput    decimal.Decimal `gorm:"type:decimal(8,2);not null;default:0;comment:the output of avatar per period"`
@@ -18,8 +16,6 @@ type Avatar struct {
 	DailySeconds decimal.Decimal `gorm:"type:decimal(8,2);not null;default:0;comment:the seconds of day which avatar work,for calculating"`
 	ValidDays    decimal.Decimal `gorm:"type:decimal(8,2);not null;default:0;comment:the valid days of avatar"`
 	LimitCount   int32           `gorm:"type:int;not null;default:0;comment:the limit count per avatar the user can hold in the current time"`
-	StartAt      *time.Time      `gorm:"type:datetime(3);index:idx_stime;default:CURRENT_TIMESTAMP(3);comment:the start time of validation"`
-	EndAt        *time.Time      `gorm:"type:datetime(3);index:idx_etime;default:CURRENT_TIMESTAMP(3);comment:the end time of validation"`
 	Status       int8            `gorm:"type:int;not null;default:0;comment:the status of avatar"`
 
 	BaseEntity

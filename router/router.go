@@ -34,6 +34,7 @@ func initV1(gin *gin.Engine) {
 	{
 		account.POST("/register", accountRouter.Register)
 		account.POST("/login", accountRouter.LoginWithMail)
+		account.POST("/changePwd", midlwre.LogonCheck(), accountRouter.LoginWithMail)
 	}
 
 	captcha := v1.Group("/captcha")

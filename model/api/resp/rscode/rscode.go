@@ -28,6 +28,10 @@ func Code(ctx *gin.Context) Lang {
 	return en_US()
 }
 
+func Eng() Lang {
+	return en_US()
+}
+
 type Lang struct {
 	// 默认httpStatusCode相关
 	RSP_CODE_SUCCEED         resp.Base //{Code: 200, Message: "成功"}
@@ -43,13 +47,15 @@ type Lang struct {
 	RSP_CODE_PERMISSION_DENIED_ERROR resp.Base //{Code: -1007, Message: "对不起,您没有权限访问此页面"}
 
 	// account模块错误相关
-	RSP_CODE_ACCOUNT_NOT_LOGIN_ERROR       resp.Base //{Code: -2001, Message: "请求非法,请登录后访问"}
-	RSP_CODE_ACCOUNT_WECHAT_ERROR          resp.Base //{Code: -2002, Message: "微信返回异常,请检查参数"}
-	RSP_CODE_ACCOUNT_NO_OPENID_ERROR       resp.Base //{Code: -2003, Message: "请求非法,请在微信内访问"}
-	RSP_CODE_ACCOUNT_NOT_EXIST_ERROR       resp.Base //{Code: -2004, Message: "用户不存在"}
-	RSP_CODE_ACCOUNT_PWD_INVALID_ERROR     resp.Base //{Code: -2005, Message: "密码不正确"}
-	RSP_CODE_ACCOUNT_PWD_ALREADY_SET_ERROR resp.Base //{Code: -2006, Message: "请求被拒绝,密码前期已设置"}
-	RSP_CODE_ACCOUNT_MEM_CARD_EMPTY_ERROR  resp.Base //{Code: -2007, Message: "没有检索到会员卡"}
+	RSP_CODE_ACCOUNT_NOT_LOGIN_ERROR         resp.Base //{Code: -2001, Message: "请求非法,请登录后访问"}
+	RSP_CODE_ACCOUNT_WECHAT_ERROR            resp.Base //{Code: -2002, Message: "微信返回异常,请检查参数"}
+	RSP_CODE_ACCOUNT_NO_OPENID_ERROR         resp.Base //{Code: -2003, Message: "请求非法,请在微信内访问"}
+	RSP_CODE_ACCOUNT_NOT_EXIST_ERROR         resp.Base //{Code: -2004, Message: "用户不存在"}
+	RSP_CODE_ACCOUNT_PWD_INVALID_ERROR       resp.Base //{Code: -2005, Message: "密码不正确"}
+	RSP_CODE_ACCOUNT_PWD_ALREADY_SET_ERROR   resp.Base //{Code: -2006, Message: "请求被拒绝,密码前期已设置"}
+	RSP_CODE_ACCOUNT_MEM_CARD_EMPTY_ERROR    resp.Base //{Code: -2007, Message: "没有检索到会员卡"}
+	RSP_CODE_ACCOUNT_INVITER_NOT_EXIST_ERROR resp.Base //{Code: -2008, Message: "推荐人不存在"}
+	RSP_CODE_ACCOUNT_ALREADY_EXIST_ERROR     resp.Base //{Code: -2009, Message: "账户已存在"}
 
 	// captcha模块错误相关
 	RSP_CODE_CAPTCHA_INVALID_ERROR       resp.Base //{Code: -5001, Message: "图形验证码错误或已失效,请点击更换"}
