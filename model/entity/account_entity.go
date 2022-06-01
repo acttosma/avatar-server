@@ -17,9 +17,7 @@ const (
 
 type Account struct {
 	Id                int64         `gorm:"primary_key"`
-	Name              string        `gorm:"type:varchar(20);not null;comment:name or nickname of account"`
-	Mail              string        `gorm:"type:varchar(100);not null;index:uidx_mail,unique;comment:email address of account"`
-	Mobile            string        `gorm:"type:varchar(20);not null;index:idx_mobile;comment:mobile number"`
+	Mail              string        `gorm:"type:varchar(100);not null;index:udx_mail,unique;comment:email address of account"`
 	Password          string        `gorm:"type:varchar(50);comment:password,md5 digested"`
 	PasswordSalt      string        `gorm:"type:varchar(20);comment:password salt,mixed with password"`
 	TradePassword     string        `gorm:"type:varchar(50);comment:trade password,md5 digested"`
