@@ -1,13 +1,13 @@
 package routers
 
 import (
-	"acttos.com/avatar/model/api/resp"
-	"acttos.com/avatar/model/api/resp/rscode"
+	"avatarmeta.cc/avatar/model/api/resp"
+	"avatarmeta.cc/avatar/model/api/resp/rscode"
 	"encoding/base64"
 	"net/http"
 	"strconv"
 
-	"acttos.com/avatar/pkg/util/logger"
+	"avatarmeta.cc/avatar/pkg/util/logger"
 	"github.com/gin-gonic/gin"
 	qrcode "github.com/skip2/go-qrcode"
 )

@@ -1,11 +1,11 @@
 package startup
 
 import (
-	"acttos.com/avatar/model/entity"
-	"acttos.com/avatar/pkg/util"
-	"acttos.com/avatar/pkg/util/logger"
-	"acttos.com/avatar/pkg/util/mysql"
-	"acttos.com/avatar/pkg/util/redis"
+	"avatarmeta.cc/avatar/model/entity"
+	"avatarmeta.cc/avatar/pkg/util"
+	"avatarmeta.cc/avatar/pkg/util/logger"
+	"avatarmeta.cc/avatar/pkg/util/mysql"
+	"avatarmeta.cc/avatar/pkg/util/redis"
 )
 
 // initialize the resource of system

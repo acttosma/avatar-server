@@ -1,4 +1,4 @@
-module acttos.com/avatar
+module avatarmeta.cc/avatar
 
 go 1.18
 

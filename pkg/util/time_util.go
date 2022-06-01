@@ -1,8 +1,8 @@
 package util
 
 import (
-	"acttos.com/avatar/model/constant"
-	"acttos.com/avatar/pkg/util/logger"
+	"avatarmeta.cc/avatar/model/constant"
+	"avatarmeta.cc/avatar/pkg/util/logger"
 	"math"
 	"time"
 )

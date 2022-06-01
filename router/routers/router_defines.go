@@ -1,7 +1,7 @@
 package routers
 
 import (
-	"acttos.com/avatar/service"
+	"avatarmeta.cc/avatar/service"
 )
 
 var (

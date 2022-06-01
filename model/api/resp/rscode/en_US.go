@@ -3,8 +3,8 @@
 package rscode
 
 import (
-	"acttos.com/avatar/model/api/resp"
-	"acttos.com/avatar/pkg/util/logger"
+	"avatarmeta.cc/avatar/model/api/resp"
+	"avatarmeta.cc/avatar/pkg/util/logger"
 )
 
 var enUS *Lang

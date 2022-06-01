@@ -1,8 +1,8 @@
 package midlwre
 
 import (
-	"acttos.com/avatar/pkg/util"
-	"acttos.com/avatar/pkg/util/logger"
+	"avatarmeta.cc/avatar/pkg/util"
+	"avatarmeta.cc/avatar/pkg/util/logger"
 	"bytes"
 	"github.com/gin-gonic/gin"
 	"io/ioutil"

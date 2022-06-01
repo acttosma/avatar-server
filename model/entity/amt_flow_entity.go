@@ -1,8 +1,8 @@
 package entity
 
 import (
-	"acttos.com/avatar/pkg/util/logger"
-	"acttos.com/avatar/pkg/util/mysql"
+	"avatarmeta.cc/avatar/pkg/util/logger"
+	"avatarmeta.cc/avatar/pkg/util/mysql"
 	"github.com/shopspring/decimal"
 	"time"
 )

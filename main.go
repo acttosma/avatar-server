@@ -3,11 +3,11 @@ package main
 import (
 	"strconv"
 
-	"acttos.com/avatar/pkg/midlwre"
-	"acttos.com/avatar/pkg/setting"
-	"acttos.com/avatar/pkg/util/logger"
-	"acttos.com/avatar/pkg/util/startup"
-	"acttos.com/avatar/router"
+	"avatarmeta.cc/avatar/pkg/midlwre"
+	"avatarmeta.cc/avatar/pkg/setting"
+	"avatarmeta.cc/avatar/pkg/util/logger"
+	"avatarmeta.cc/avatar/pkg/util/startup"
+	"avatarmeta.cc/avatar/router"
 	"github.com/gin-gonic/gin"
 )
 

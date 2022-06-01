@@ -1,8 +1,8 @@
 package midlwre
 
 import (
-	"acttos.com/avatar/model/api/resp/rscode"
-	"acttos.com/avatar/pkg/util"
+	"avatarmeta.cc/avatar/model/api/resp/rscode"
+	"avatarmeta.cc/avatar/pkg/util"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )

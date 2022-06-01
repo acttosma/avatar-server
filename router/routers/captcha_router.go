@@ -1,9 +1,9 @@
 package routers
 
 import (
-	"acttos.com/avatar/model/api/resp"
-	"acttos.com/avatar/model/api/resp/rscode"
-	"acttos.com/avatar/pkg/util/logger"
+	"avatarmeta.cc/avatar/model/api/resp"
+	"avatarmeta.cc/avatar/model/api/resp/rscode"
+	"avatarmeta.cc/avatar/pkg/util/logger"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )

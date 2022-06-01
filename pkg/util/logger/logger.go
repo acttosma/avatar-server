@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"acttos.com/avatar/pkg/setting"
+	"avatarmeta.cc/avatar/pkg/setting"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"

@@ -1,7 +1,7 @@
 package rscode
 
 import (
-	"acttos.com/avatar/model/api/resp"
+	"avatarmeta.cc/avatar/model/api/resp"
 	"github.com/gin-gonic/gin"
 	"sync"
 )

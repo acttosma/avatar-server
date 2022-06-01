@@ -1,7 +1,7 @@
 package service
 
 import (
-	"acttos.com/avatar/model/constant"
+	"avatarmeta.cc/avatar/model/constant"
 	"bytes"
 	"encoding/base64"
 	"errors"
@@ -11,9 +11,9 @@ import (
 	"strings"
 	"time"
 
-	"acttos.com/avatar/model/api/resp"
-	"acttos.com/avatar/pkg/util"
-	"acttos.com/avatar/pkg/util/redis"
+	"avatarmeta.cc/avatar/model/api/resp"
+	"avatarmeta.cc/avatar/pkg/util"
+	"avatarmeta.cc/avatar/pkg/util/redis"
 	"github.com/fogleman/gg"
 	"github.com/golang/freetype/truetype"
 	"golang.org/x/image/font"

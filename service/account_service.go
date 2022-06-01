@@ -1,12 +1,12 @@
 package service
 
 import (
-	"acttos.com/avatar/model/api/resp"
-	"acttos.com/avatar/model/api/resp/rscode"
-	"acttos.com/avatar/model/constant"
-	"acttos.com/avatar/model/entity"
-	"acttos.com/avatar/pkg/util"
-	"acttos.com/avatar/pkg/util/logger"
+	"avatarmeta.cc/avatar/model/api/resp"
+	"avatarmeta.cc/avatar/model/api/resp/rscode"
+	"avatarmeta.cc/avatar/model/constant"
+	"avatarmeta.cc/avatar/model/entity"
+	"avatarmeta.cc/avatar/pkg/util"
+	"avatarmeta.cc/avatar/pkg/util/logger"
 	"gorm.io/gorm"
 	"net/http"
 	"strconv"

@@ -5,8 +5,8 @@ import (
 	"sync"
 	"time"
 
-	"acttos.com/avatar/pkg/setting"
-	"acttos.com/avatar/pkg/util/logger"
+	"avatarmeta.cc/avatar/pkg/setting"
+	"avatarmeta.cc/avatar/pkg/util/logger"
 	"github.com/go-redis/redis/v8"
 )
 

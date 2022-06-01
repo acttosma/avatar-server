@@ -1,11 +1,11 @@
 package routers
 
 import (
-	"acttos.com/avatar/model/api/resp/rscode"
+	"avatarmeta.cc/avatar/model/api/resp/rscode"
 	"net/http"
 
-	"acttos.com/avatar/model/api/req"
-	"acttos.com/avatar/pkg/util/logger"
+	"avatarmeta.cc/avatar/model/api/req"
+	"avatarmeta.cc/avatar/pkg/util/logger"
 	"github.com/gin-gonic/gin"
 )
 

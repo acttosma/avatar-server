@@ -1,11 +1,11 @@
 package router
 
 import (
-	"acttos.com/avatar/pkg/midlwre"
+	"avatarmeta.cc/avatar/pkg/midlwre"
 	"github.com/gin-gonic/gin"
 
-	"acttos.com/avatar/docs"
-	"acttos.com/avatar/router/routers"
+	"avatarmeta.cc/avatar/docs"
+	"avatarmeta.cc/avatar/router/routers"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
