@@ -34,7 +34,7 @@ func initV1(gin *gin.Engine) {
 	{
 		account.POST("/register", accountRouter.Register)
 		account.POST("/login", accountRouter.LoginWithMail)
-		account.POST("/changePwd", midlwre.LogonCheck(), accountRouter.LoginWithMail)
+		account.POST("/changePwd", midlwre.LogonCheck(), accountRouter.ChangePassword)
 		account.POST("/changeSetTradePwd", midlwre.LogonCheck(), accountRouter.LoginWithMail)
 		account.POST("/changeTradePwd", midlwre.LogonCheck(), accountRouter.LoginWithMail)
 	}

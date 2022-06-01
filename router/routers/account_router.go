@@ -96,3 +96,28 @@ func (ar *AccountRouter) ChangePassword(c *gin.Context) {
 	code, resp := accountService.ChangePassword(actIdStr, prePassword, password)
 	c.JSON(code, resp)
 }
+
+// @BasePath /api/v1
+// @Tags Audience - Account Module
+// @Summary User change the trade password while logged in
+// @Description Change the trade password, remember user must be online when do this action
+// @Accept json
+// @Produce json
+// @Param data body req.ChangePassword true "ChangePassword"
+// @Success 200 {object} resp.Base
+// @Router /account/changeTradePwd [POST]
+func (ar *AccountRouter) ChangeTradePassword(c *gin.Context) {
+	var reqModel req.ChangePassword
+	if err := c.ShouldBind(&reqModel); err != nil {
+		logger.Monitor.Errorf("ChangeTradePassword param parse error:%+v", err)
+		c.JSON(http.StatusBadRequest, rscode.Code(c).RSP_CODE_PARAM_ERROR)
+		return
+	}
+
+	actIdStr := c.Request.Header.Get("AccountId")
+	prePassword := reqModel.PreviousPassword
+	password := reqModel.Password
+
+	code, resp := accountService.ChangeTradePassword(actIdStr, prePassword, password)
+	c.JSON(code, resp)
+}
